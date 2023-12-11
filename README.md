@@ -5,10 +5,7 @@ Need a rice cooker? Go buy one then, or if you're not sure about how that dark m
 
 ## Languages:
 This program is available in these languages:
-* [Typescript]()
-* [Ruby]()
-* [Go]()
-* [Swift]()
+* [Typescript](https://github.com/hei-school/cc-d2-my-rice-cooker-RyanIaro/tree/feature/typescript)
 
 ## Features:
 1. Cook rice (duh), need to add the rice and some water first
