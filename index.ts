@@ -1,3 +1,4 @@
+import { error } from 'console';
 import * as readlineSync from 'readline-sync';
 
 export class RiceCooker {
@@ -35,10 +36,11 @@ export class RiceCooker {
       console.log("1. Open the rice cooker");
       console.log("2. Check cooking status");
       console.log("3. Keep warm");
-      console.log("4. Interrupt/Resume cooking");
-      console.log("5. Unplug the rice cooker (Exit)");
+      console.log("4. Disable Keep Warm mode");
+      console.log("5. Interrupt/Resume cooking");
+      console.log("6. Unplug the rice cooker (Exit)");
 
-      const choice = readlineSync.question(": ");
+      const choice = readlineSync.question("Please enter a number between 1 & 6(not blank): ");
 
       switch (choice) {
         case "1":
@@ -55,11 +57,13 @@ export class RiceCooker {
           this.interruptOrResumeCooking();
           break;
         case "5":
+          this.disableWarmMode();
+          break;
+        case "6":
           this.unplug();
           break;
         default:
-          console.log("Invalid choice. Please enter a number between 1 and 5.");
-          break;
+          throw new Error("Oops! You somehow managed to break the rice cooker, please buy another one.");
       }
     }
   }
@@ -74,7 +78,7 @@ export class RiceCooker {
       console.log("5. Start cooking");
       console.log("6. Close the rice cooker");
 
-      const choice = readlineSync.question(": ");
+      const choice = readlineSync.question("Please enter a number between 1 & 6(not blank): ");
 
       switch (choice) {
         case "1":
@@ -95,14 +99,13 @@ export class RiceCooker {
         case "6":
           return;
         default:
-          console.log("Invalid choice. Please enter a number between 1 and 6.");
-          break;
+          throw new Error("Oops! You somehow managed to break the rice cooker, please buy another one.");
       }
     }
   }
   
   private addRice(): void {
-      if (this.hasRice === false) {
+      if (!this.hasRice) {
           this.hasRice = true;
           console.log("You add rice to the rice cooker.");            
       } else {
@@ -111,7 +114,7 @@ export class RiceCooker {
   }
   
   private addWater(): void {
-      if (this.hasWater === false) {
+      if (!this.hasWater) {
           this.hasWater = true;
           console.log("You add water to the rice cooker.");            
       } else {
@@ -120,7 +123,7 @@ export class RiceCooker {
   }
 
   private removeRice(): void {
-      if (this.hasRice === true) {
+      if (this.hasRice) {
           this.hasRice = false;
           console.log("You removed the rice from the rice cooker.");
       } else {
@@ -129,7 +132,7 @@ export class RiceCooker {
   }
 
   private removeWater(): void {
-      if (this.hasWater === true) {
+      if (this.hasWater) {
           this.hasWater = false;
           console.log("Water removed from the rice cooker.");
       } else {
