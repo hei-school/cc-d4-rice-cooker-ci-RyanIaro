@@ -1,12 +1,32 @@
 import * as readlineSync from 'readline-sync';
 
-class RiceCooker {
+export class RiceCooker {
   private cookingStatus: "cooking" | "finished" | "idle" = "idle";
   private warmMode: boolean = false;
   private hasRice: boolean = false;
   private hasWater: boolean = false;
   private cookingTimer: NodeJS.Timeout | null = null;
 
+  getCookingStatus(): String {
+    return this.cookingStatus;
+  }
+
+  getWarmMode(): boolean {
+    return this.warmMode;
+  }
+
+  getHasRice(): boolean {
+    return this.hasRice;
+  }
+
+  getHasWater(): boolean {
+    return this.hasWater;
+  }
+
+  getCookingTimer(): NodeJS.Timeout | null {
+    return this.cookingTimer;
+  }
+  
   plug(): void {
     console.log("Welcome to the Rice Cooker Program!");
 
@@ -71,9 +91,9 @@ class RiceCooker {
           break;
         case "5":
           this.startCooking();
-          break;
-        case "6":
           return; // Close the rice cooker and go back to the plug() prompt
+        case "6":
+          return;
         default:
           console.log("Invalid choice. Please enter a number between 1 and 6.");
           break;
@@ -81,118 +101,116 @@ class RiceCooker {
     }
   }
   
-    private addRice(): void {
-        if (this.hasRice === false) {
-            this.hasRice = true;
-            console.log("You add rice to the rice cooker.");            
-        } else {
-            console.log("There is already rice inside");
-        }
-    }
-  
-    private addWater(): void {
-        if (this.hasWater === false) {
-            this.hasWater = true;
-            console.log("You add water to the rice cooker.");            
-        } else {
-            console.log("There is already water inside");
-        }
-    }
-  
-    private removeRice(): void {
-        if (this.hasRice === true) {
-            this.hasRice = false;
-            console.log("You removed the rice from the rice cooker.");
-        } else {
-            console.log("There is nothing to remove.");
-        }
-    }
-  
-    private removeWater(): void {
-        if (this.hasWater === true) {
-            this.hasWater = false;
-            console.log("Water removed from the rice cooker.");
-        } else {
-            console.log("There is nothing to remove.");
-        }
-    }
-  
-    private startCooking(): void {
-      if (this.hasRice && this.hasWater) {
-
-        this.cookingStatus = "cooking";
-        this.hasWater = false;
-        console.log("Cooking started. Come back in 2 minutes.");
-        this.cookingTimer = setTimeout(() => this.finishCooking(), 120000); // 2 minutes
-
-      } else if (!this.hasRice && this.hasWater) {
-
-        this.cookingStatus = "cooking";
-        console.log("Boiling started. Come back in 1 minutes.");
-        this.cookingTimer = setTimeout(() => this.finishCooking(), 60000); // 1 minute
-
+  private addRice(): void {
+      if (this.hasRice === false) {
+          this.hasRice = true;
+          console.log("You add rice to the rice cooker.");            
       } else {
-        console.log("You can't cook air. Please add rice and/or water inside first.");
-
+          console.log("There is already rice inside");
       }
-    }
-  
-    private finishCooking(): void {
-      this.cookingStatus = "finished";
-      console.log("The cooking is complete. Please take out the rice/water.");
-      this.cookingTimer = null;
-    }
-  
-    interruptOrResumeCooking(): void {
-      if (this.cookingStatus === "cooking") {
-        this.interruptCooking();
-      } else if (this.cookingStatus === "idle") {
-        if (this.hasRice || this.hasWater) {
-          this.startCooking();
-        } else {
-          console.log("You already cooked something inside.");
-        }
-      }
-    }
-  
-    private interruptCooking(): void {
-      if (this.cookingTimer) {
-        clearTimeout(this.cookingTimer);
-        this.cookingStatus = "idle";
-        console.log("Cooking interrupted. Rice cooker is now idle.");
-        this.cookingTimer = null;
-      }
-    }
-  
-    keepWarm(duration: number): void {
-      if (this.cookingStatus === "finished" && !this.warmMode) {
-        this.warmMode = true;
-        console.log(`Keep Warm mode activated. Keeping warm for ${duration} minutes.`);
-        setTimeout(() => this.disableWarmMode(), duration * 60000);
-      } else {
-        console.log("Keep Warm mode can only be activated after cooking is complete.");
-      }
-    }
-  
-    private disableWarmMode(): void {
-        if (this.warmMode) {
-            this.warmMode = false;
-            console.log("Keep Warm mode deactivated.");
-        } else {
-            console.log("Keep Warm mode is not active.");
-        }
-    }
-  
-    unplug(): void {
-      console.log("You unplug the Rice cooker.");
-      process.exit();
-    }
-  
-    checkCookingStatus(): void {
-      console.log(`Current cooking status: ${this.cookingStatus}`);
-    }
   }
   
+  private addWater(): void {
+      if (this.hasWater === false) {
+          this.hasWater = true;
+          console.log("You add water to the rice cooker.");            
+      } else {
+          console.log("There is already water inside");
+      }
+  }
+
+  private removeRice(): void {
+      if (this.hasRice === true) {
+          this.hasRice = false;
+          console.log("You removed the rice from the rice cooker.");
+      } else {
+          console.log("There is nothing to remove.");
+      }
+  }
+
+  private removeWater(): void {
+      if (this.hasWater === true) {
+          this.hasWater = false;
+          console.log("Water removed from the rice cooker.");
+      } else {
+          console.log("There is nothing to remove.");
+      }
+  }
+
+  private startCooking(): void {
+    if (this.hasRice && this.hasWater) {
+      this.cookingStatus = "cooking";
+      this.hasWater = false;
+      console.log("Cooking started. Come back in 2 minutes.");
+      this.cookingTimer = setTimeout(() => this.finishCooking(), 12000); // 2 minutes
+
+    } else if (this.hasRice && !this.hasWater) {
+      console.log("You can't cook rice without water. Please add water first.");
+      
+    } else if (!this.hasRice && this.hasWater) {
+      this.cookingStatus = "cooking";
+      console.log("Boiling started. Come back in 1 minutes.");
+      this.cookingTimer = setTimeout(() => this.finishCooking(), 6000); // 1 minute
+      
+    } else {
+      console.log("You can't cook air. Please add rice and/or water inside first.");
+    }
+  }
+
+  private finishCooking(): void {
+    this.cookingStatus = "finished";
+    console.log("The cooking is complete. Please take out the rice/water.");
+    this.cookingTimer = null;
+  }
+
+  interruptOrResumeCooking(): void {
+    if (this.cookingStatus === "cooking") {
+      this.interruptCooking();
+    } else if (this.cookingStatus === "idle") {
+        this.startCooking();
+      } else {
+        console.log("You already cooked something inside.");
+    }
+  }
+
+  private interruptCooking(): void {
+    if (this.cookingTimer) {
+      clearTimeout(this.cookingTimer);
+      this.cookingStatus = "idle";
+      console.log("Cooking interrupted. Rice cooker is now idle.");
+      this.cookingTimer = null;
+    }
+  }
+
+  keepWarm(duration: number): void {
+    if (this.cookingStatus === "finished" && !this.warmMode) {
+      this.warmMode = true;
+      console.log(`Keep Warm mode activated. Keeping warm for ${duration} minutes.`);
+      setTimeout(() => this.disableWarmMode(), duration * 6000);
+    } else {
+      console.log("Keep Warm mode can only be activated after cooking is complete.");
+    }
+  }
+
+  private disableWarmMode(): void {
+      if (this.warmMode) {
+          this.warmMode = false;
+          console.log("Keep Warm mode deactivated.");
+      } else {
+          console.log("Keep Warm mode is not active.");
+      }
+  }
+
+  unplug(): void {
+    console.log("You unplug the Rice cooker.");
+    process.exit();
+  }
+
+  checkCookingStatus(): void {
+    console.log(`Current cooking status: ${this.cookingStatus}`);
+  }
+}
   
-  const riceCooker = new RiceCooker();
-  riceCooker.plug();
+  
+const riceCooker = new RiceCooker();
+riceCooker.plug();
