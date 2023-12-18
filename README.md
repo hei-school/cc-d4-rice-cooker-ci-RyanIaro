@@ -12,5 +12,28 @@ This program is available in these languages:
 2. Boil water, because you can
 3. Check cooking status: cooking, finished or idle
 4. Keep warm, for a certain duration
-5. Interrupt/Resume cooking
-6. Unplug the rice cooker(exit the program)
+5. Disable warm mode
+6. Interrupt/Resume cooking
+7. Unplug the rice cooker(exit the program)
+
+## Installation:
+First you want to download this project on this current branch
+
+Make sur you have Node.js installed on your computer, download it [here](https://nodejs.org/en/download) and install it on your computer. To be sure it is correctly installed, open your terminal and execute this commandn your should see the version of node installed on your computer:
+
+    node --version
+
+Then you need to install the dependencies, in your terminal, navigate to the directory where the index.ts file is and execute this command:
+
+    npm install
+
+## Usage:
+Now is the time to use your rice cooker, no, not the one in your kitchen, this virtual program.
+
+All you need to do is compile the typescript, this command will transform the typescript code into javascript code, you should see a new file named index.js:
+
+    npx tsc index.ts
+
+then execute the program with:
+
+    node index.js
