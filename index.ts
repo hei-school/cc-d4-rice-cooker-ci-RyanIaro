@@ -1,4 +1,3 @@
-import { error } from 'console';
 import * as readlineSync from 'readline-sync';
 
 export class RiceCooker {
@@ -104,7 +103,7 @@ export class RiceCooker {
     }
   }
   
-  private addRice(): void {
+  addRice(): void {
       if (!this.hasRice) {
           this.hasRice = true;
           console.log("You add rice to the rice cooker.");            
@@ -113,7 +112,7 @@ export class RiceCooker {
       }
   }
   
-  private addWater(): void {
+  addWater(): void {
       if (!this.hasWater) {
           this.hasWater = true;
           console.log("You add water to the rice cooker.");            
@@ -122,7 +121,7 @@ export class RiceCooker {
       }
   }
 
-  private removeRice(): void {
+  removeRice(): void {
       if (this.hasRice) {
           this.hasRice = false;
           console.log("You removed the rice from the rice cooker.");
@@ -131,7 +130,7 @@ export class RiceCooker {
       }
   }
 
-  private removeWater(): void {
+  removeWater(): void {
       if (this.hasWater) {
           this.hasWater = false;
           console.log("Water removed from the rice cooker.");
@@ -140,7 +139,7 @@ export class RiceCooker {
       }
   }
 
-  private startCooking(): void {
+  startCooking(): void {
     if (this.hasRice && this.hasWater) {
       this.cookingStatus = "cooking";
       this.hasWater = false;
@@ -160,7 +159,7 @@ export class RiceCooker {
     }
   }
 
-  private finishCooking(): void {
+  finishCooking(): void {
     this.cookingStatus = "finished";
     console.log("The cooking is complete. Please take out the rice/water.");
     this.cookingTimer = null;
@@ -176,7 +175,7 @@ export class RiceCooker {
     }
   }
 
-  private interruptCooking(): void {
+  interruptCooking(): void {
     if (this.cookingTimer) {
       clearTimeout(this.cookingTimer);
       this.cookingStatus = "idle";
@@ -195,7 +194,7 @@ export class RiceCooker {
     }
   }
 
-  private disableWarmMode(): void {
+  disableWarmMode(): void {
       if (this.warmMode) {
           this.warmMode = false;
           console.log("Keep Warm mode deactivated.");

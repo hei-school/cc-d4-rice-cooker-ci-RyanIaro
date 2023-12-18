@@ -1,0 +1,27 @@
+{
+  "name": "my-rice-cooker",
+  "version": "1.0.0",
+  "description": "[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/PHq8Kfj_)",
+  "main": "index.ts",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hei-school/cc-d4-rice-cooker-ci-RyanIaro.git"
+  },
+  "author": "RyanIaro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hei-school/cc-d4-rice-cooker-ci-RyanIaro/issues"
+  },
+  "homepage": "https://github.com/hei-school/cc-d4-rice-cooker-ci-RyanIaro#readme",
+  "devDependencies": {
+    "@babel/core": "^7.23.6",
+    "@babel/preset-env": "^7.23.6",
+    "@babel/preset-typescript": "^7.23.3",
+    "babel-jest": "^29.7.0",
+    "ts-jest": "^29.1.1"
+  }
+}
